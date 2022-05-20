@@ -1,0 +1,29 @@
+---
+title: "Collab-assignment-4"
+author: "Rohan Baghel"
+date: '2022-05-20'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  eval = TRUE,
+  message = FALSE,  # Change this to FALSE before you submit your assignment
+  warning = FALSE,  # Change this to FALSE before you submit your assignment
+  error = FALSE,    # Change this to FALSE before you submit your assignment
+  out.width = "80%",
+  fig.width = 8, 
+  fig.height = 6,
+  fig.retina = 3)
+set.seed(6)
+```
+
+```{r}
+library(tidyverse)
+library(readr)
+library(kableExtra)
+library(bookdown)
+```
+
+
