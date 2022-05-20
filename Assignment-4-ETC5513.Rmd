@@ -26,4 +26,15 @@ library(kableExtra)
 library(bookdown)
 ```
 
+```{r read_data}
+La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
+```
+
+# Section-1 
+
+# Section-2
+
+# Section-3
+
+# Section-4
 
