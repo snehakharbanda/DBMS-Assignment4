@@ -45,6 +45,7 @@ Midfielder_data <- La_liga_data %>%
          Shirt.number,
          Minutes.played,
          Games.played,
+         Passes,
          Tackles,
          Interceptions,
          Recoveries,
@@ -74,12 +75,8 @@ Top_10_Midfielder_Assists <- Midfielder_data %>%
          Name,
          Shirt.number,
          Games.played,
-         Assists)
-```
-
-```{r Top_10_Assists, caption = "Top 10 midfielders with highest assists" }
-kable(Top_10_Midfielder_Assists[1:10,1:5], 
-      caption = "Top 10 midfielders with highest assists")
+         Assists) %>%
+  arrange(desc(Assists))
 ```
 
 ```{r}
@@ -93,12 +90,70 @@ Top_10_Midfielder_Goals <- Midfielder_data %>%
 ```
 
 ```{r}
-kable(Top_10_Midfielder_Goals[1:10,1:5], caption = "Top 10 midfielders with highest goals")
+Attack_performance <- inner_join(Top_10_Midfielder_Goals,Top_10_Midfielder_Assists)[1:10,1:6]
+
+kable(Attack_performance, caption = "Best Attacking Midfielders in La Liga (Statistics)")
+```
+
+```{r }
+ggplot(Attack_performance,
+       aes(x = Games.played)) +
+  geom_col(aes( y = Goals.scored, color = "Goals scored")) +
+  geom_col(aes( y = Assists, color = "Assists")) +
+  facet_wrap(~Name, ncol = 5) +
+  theme_classic() +
+  xlab("Games Played") +
+  ylab("Attack Performance") +
+  labs(title = "Best Attacking Midfielders in La Liga")
+  
 ```
 
 ```{r}
-Overall_performance <- inner_join(Top_10_Midfielder_Goals,Top_10_Midfielder_Assists)[1:10,1:6]
+Top_10_Midfielder_Recoveries <- Midfielder_data %>%
+  select(Team,
+         Name,
+         Shirt.number,
+         Games.played,
+         Recoveries) %>%
+  arrange(desc(Recoveries))
+
 ```
 
+```{r}
+Top_10_Midfielder_Successful_tackles <- Midfielder_data %>%
+  select(Team,
+         Name,
+         Shirt.number,
+         Games.played,
+         Successful.tackles) %>%
+  arrange(desc(Successful.tackles))
+```
+
+```{r}
+
+Defence_Performance <- inner_join(Top_10_Midfielder_Recoveries,Top_10_Midfielder_Successful_tackles)[1:10,1:6]
+
+kable(Defence_Performance, caption = "Best Defensive Midfielders in La Liga (Statistics)")
+
+```
+
+```{r}
+ggplot(Defence_Performance,
+       aes(x = Games.played)) +
+  geom_col(aes(y = Recoveries, color = "Recoveries")) +
+  geom_col( aes(y = Successful.tackles, color = "Successful tackles")) +
+  facet_wrap(~Name, ncol = 5) +
+  theme_classic() +
+  xlab("Games Played") +
+  ylab("Defence Performance") +
+  labs(title = "Best Defensive Midfielders in La Liga ")
+```
+
+
+```{r}
+Best_Midfielder <- inner_join(Defence_Performance,Attack_performance)
+
+kable(Best_Midfielder)
+```
 
 # Section-4
