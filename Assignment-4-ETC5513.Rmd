@@ -2,7 +2,7 @@
 title: "Collab-assignment-4"
 author: "Rohan Baghel"
 date: '2022-05-20'
-output: html_document
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
@@ -35,6 +35,14 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 # Section-2
 
 # Section-3
+
+### Aim :
+
+* Find out the best attacking midfielders in La Liga and analyze their performance.
+
+* Find out the best defensive midfielders in La Liga and analyze their performance.
+
+Midfielders are the players that are present between the forwards and the defenders. The role of a midfielder is to support both the strikers and the defenders. They act is a link between the attack and defense of a team. The flow of a game is dictated by the midfielders as they are the ones responsible for keeping the ball in possession.
 
 ```{r}
 Midfielder_data <- La_liga_data %>%
@@ -69,7 +77,7 @@ Midfielder_data <- La_liga_data %>%
   arrange(desc(Assists))
 ```
 
-```{r}
+```{r }
 Top_10_Midfielder_Assists <- Midfielder_data %>%
   select(Team,
          Name,
@@ -89,13 +97,20 @@ Top_10_Midfielder_Goals <- Midfielder_data %>%
   arrange(desc(Goals.scored))
 ```
 
-```{r}
+From the table \@ref(tab:Attack) we can see the attacking performance of midfielders in La Liga. Sarabia of Sevilla FC stands at the top with 12 goals scored and 13 assists with 33 games played. Every other player has fewer assists than him and only J. Morales from Levante UD was able to match his record of 12 goals. 
+
+```{r Attack }
 Attack_performance <- inner_join(Top_10_Midfielder_Goals,Top_10_Midfielder_Assists)[1:10,1:6]
 
-kable(Attack_performance, caption = "Best Attacking Midfielders in La Liga (Statistics)")
+kable(Attack_performance, caption = "Best Attacking Midfielders in La Liga (Statistics)") %>%
+  kable_material_dark()
 ```
 
-```{r }
+
+The figure \@ref(fig:ggAttack) gives a better outlook at the performance of the top midfielders in La Liga. Sarabia and J. Morales standout among their peers as they clearly the leaders in attacking style play, they have scored goals and provided assistance for the benefit of their team. Joaquin from Real Betis is a special case as he is the only midfielder that has provided zero assists but scored 6 goals for his team, earning him a place among the top ten midfielders of La Liga. 
+
+
+```{r ggAttack,fig.cap = "Best Attacking Midfielders in La Liga" }
 ggplot(Attack_performance,
        aes(x = Games.played)) +
   geom_col(aes( y = Goals.scored, color = "Goals scored")) +
@@ -129,15 +144,22 @@ Top_10_Midfielder_Successful_tackles <- Midfielder_data %>%
   arrange(desc(Successful.tackles))
 ```
 
-```{r}
+From the table \@ref(tab:Defense), we see the top defensive midfielders in La Liga. Banega from Sevilla FC tops the table, making 290 recoveries and 50 successful tackles in 32 games. Only Rodrigo from Atlético de Madrid has the most successful tackles than Banega standing at 70. None of the other peers have come closer Rodrigo in their skill of tackling an opponent. 
+
+```{r Defense}
 
 Defence_Performance <- inner_join(Top_10_Midfielder_Recoveries,Top_10_Midfielder_Successful_tackles)[1:10,1:6]
 
-kable(Defence_Performance, caption = "Best Defensive Midfielders in La Liga (Statistics)")
+kable(Defence_Performance, caption = "Best Defensive Midfielders in La Liga (Statistics)") %>%
+  kable_material_dark()
 
 ```
 
-```{r}
+
+From the figure \@ref(fig:ggDefense) we can see that all the defensive midfielders have been almost at the same skill. The top performers Banega and Rodrigo stand out in their individual departments but are almost at the same level as their peers in La Liga. Banega seems to more of a top performer because he is on the top of table even though has played the fewest games 32, except Rubén Pérez J. who has played 31 and is at the bottom of the table.
+
+
+```{r ggDefense,fig.cap = "Best Defensive Midfielders in La Liga " }
 ggplot(Defence_Performance,
        aes(x = Games.played)) +
   geom_col(aes(y = Recoveries, color = "Recoveries")) +
@@ -146,14 +168,18 @@ ggplot(Defence_Performance,
   theme_classic() +
   xlab("Games Played") +
   ylab("Defence Performance") +
-  labs(title = "Best Defensive Midfielders in La Liga ")
+  labs(title = "Best Defensive Midfielders in La Liga ") 
 ```
 
+The best overall performance is given by Parejo of Valencia CF as we can from the table \@ref(tab:best). He has made 270 recoveries, 42 successful tackles, scored 9 goals and made 7 assists. He has been at the third position in both attacking midfielders and defensive midfielders. His performance has been exceptional as midfielder and is quite an ideal candidate for any team.
 
-```{r}
+
+```{r best}
 Best_Midfielder <- inner_join(Defence_Performance,Attack_performance)
 
-kable(Best_Midfielder)
+kable(Best_Midfielder, caption = "Best Overall Performace") %>%
+  kable_material_dark()
+
 ```
 
 # Section-4
