@@ -26,4 +26,79 @@ library(kableExtra)
 library(bookdown)
 ```
 
+```{r read_data}
+La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
+```
 
+# Section-1 
+
+# Section-2
+
+# Section-3
+
+```{r}
+Midfielder_data <- La_liga_data %>%
+  filter(Position == "Midfielder") %>%
+  select(Team,
+         Name,
+         Position,
+         Shirt.number,
+         Minutes.played,
+         Games.played,
+         Tackles,
+         Interceptions,
+         Recoveries,
+         Clearances,
+         Successful.tackles,
+         Unssuccessful.tackles,
+         Successful.dribbles,
+         Unsuccessful.dribbles,
+         Shots.on.target,
+         Shots,
+         Assists,
+         Goals.scored,
+         Penalties.won,
+         Fouls.committed,
+         Fouls.suffered,
+         Yellow.Cards,
+         Second.Yellows,
+         Red.Cards,
+         Fouls.committed.per.card,
+         Penalties.given.away) %>%
+  arrange(desc(Assists))
+```
+
+```{r}
+Top_10_Midfielder_Assists <- Midfielder_data %>%
+  select(Team,
+         Name,
+         Shirt.number,
+         Games.played,
+         Assists)
+```
+
+```{r Top_10_Assists, caption = "Top 10 midfielders with highest assists" }
+kable(Top_10_Midfielder_Assists[1:10,1:5], 
+      caption = "Top 10 midfielders with highest assists")
+```
+
+```{r}
+Top_10_Midfielder_Goals <- Midfielder_data %>%
+  select(Team,
+         Name,
+         Shirt.number,
+         Games.played,
+         Goals.scored) %>%
+  arrange(desc(Goals.scored))
+```
+
+```{r}
+kable(Top_10_Midfielder_Goals[1:10,1:5], caption = "Top 10 midfielders with highest goals")
+```
+
+```{r}
+Overall_performance <- inner_join(Top_10_Midfielder_Goals,Top_10_Midfielder_Assists)[1:10,1:6]
+```
+
+
+# Section-4
