@@ -38,3 +38,15 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 # Section-4
 
+## Goalkeeper
+
+### Question:
+
+- Do the goalkeepers play a dominant role in a football team winning rate? 
+
+```{r}
+goal_data <- La_liga_data %>%
+  filter(Position == "Goalkeeper")
+```
+
+
