@@ -94,7 +94,19 @@ ggplotly(p)
 ```
 The figure \@ref(fig:goals-v-success)) is a scatter plot of all the players' goals and success score per game. The players that occur on the top right corner are so far the top players in our analysis. By hovering the cursor over points we can see that Messi appears to be one of the top players.
 
+```{r Top}
+Forward_top <- Forward %>% 
+  mutate(rank = (Goal_rank + Score_rank)/2) %>%
+  arrange(rank) %>%
+  select(Team, Name)
 
+Forward_top <- Forward_top %>% slice_head(n=5) %>%
+  kable(caption = "Top 5 forward position players") %>%
+  kable_styling(position = "center")
+
+Forward_top
+```
+The table \@ref(tab:Top) displays the top 5 forward position players in the LaLiga Tournament according to the 2019-2022 data on the basis of their goals, assists, successful duels and tackles per game. **Messi from Barcelona** is at the top of the list followed by Stuani, Mata, Morata and M. Gómez.\
 
 # Section-3
 
