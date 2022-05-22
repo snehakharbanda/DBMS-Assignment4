@@ -9,9 +9,9 @@ output: html_document
 knitr::opts_chunk$set(
   echo = FALSE,
   eval = TRUE,
-  message = FALSE,  # Change this to FALSE before you submit your assignment
-  warning = FALSE,  # Change this to FALSE before you submit your assignment
-  error = FALSE,    # Change this to FALSE before you submit your assignment
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
   out.width = "80%",
   fig.width = 8, 
   fig.height = 6,
@@ -32,7 +32,25 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 # Section-1 
 
-# Section-2
+# Section-2: Forward
+
+The aim of this section is to analyse which player is the best in the *Forward position* in the LaLiga Tournament based on data from 2019-2020.  
+
+```{r Filter-Data}
+Forward <- La_liga_data %>%
+  filter (Position == "Forward")
+
+Forward <- Forward %>%
+  select(Team, Name, Games.played, Yellow.Cards, Goals.scored, Penalties.scored, Successful.tackles, Recoveries, Successful.duels, Assists) %>%
+  rename("Games_played" = Games.played,
+         "Yellow_cards" = Yellow.Cards,
+         "Goals_scored" = Goals.scored,
+         "Penalties_scored" = Penalties.scored,
+         "Successful_tackles" = Successful.tackles,
+         "Successful_duels" = Successful.duels)
+```
+
+
 
 # Section-3
 
