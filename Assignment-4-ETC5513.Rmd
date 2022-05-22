@@ -2,7 +2,7 @@
 title: "Collab-assignment-4"
 author: "Rohan Baghel"
 date: '2022-05-20'
-output: html_document
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
@@ -32,7 +32,7 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 # Section-1 
 
-# Section-2: Forward
+# Position: Forward
 
 The aim of this section is to analyse which player is the best in the *Forward position* in the LaLiga Tournament based on data from 2019-2020.  
 
@@ -41,7 +41,7 @@ Forward <- La_liga_data %>%
   filter (Position == "Forward")
 
 Forward <- Forward %>%
-  select(Team, Name, Games.played, Yellow.Cards, Goals.scored, Penalties.scored, Successful.tackles, Recoveries, Successful.duels, Assists) %>%
+  select(Team, Name, Games.played, Yellow.Cards, Goals.scored, Penalties.scored, Successful.tackles, Recoveries, Successful.duels, Assists, Interceptions, Recoveries) %>%
   rename("Games_played" = Games.played,
          "Yellow_cards" = Yellow.Cards,
          "Goals_scored" = Goals.scored,
@@ -50,6 +50,24 @@ Forward <- Forward %>%
          "Successful_duels" = Successful.duels)
 ```
 
+Goals Scored, Penalties Scored and Assists account for the most successful outcome given by a player in the Forward position.
+
+```{r Goals-Analysis}
+Forward <- Forward %>%
+  mutate(goals_per_game = ((Goals_scored + Penalties_scored + Assists)/Games_played)) %>%
+  arrange(desc(goals_per_game))
+
+Forward_Goal <- Forward %>%
+  slice_head(n=10) %>%
+  mutate(rank = 1:10)
+  select(Team, Name, goals_per_game) %>%
+  kable(caption = "Top 10 forward position players for goals per game") %>%
+  kable_styling(position = "center")
+
+Forward_Goal
+```
+
+The table \@ref(tab:Goals-Analysis) displays the top 10 players in the forward position along with the team they play for with the highest goals, penalties and assists per game.
 
 
 # Section-3
