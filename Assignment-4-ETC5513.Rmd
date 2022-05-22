@@ -72,19 +72,27 @@ The table \@ref(tab:Goals-Analysis) displays the Name and Team of the top 5 play
 
 ```{r Success-Scores}
 Forward <- Forward %>%
-  mutate(score = (Successful_tackles + Successful_duels + Successful_aerial_challenges)/Games_played) %>%
-  arrange(desc(score))  %>%
+  mutate(success_score = (Successful_tackles + Successful_duels + Successful_aerial_challenges)/Games_played) %>%
+  arrange(desc(success_score))  %>%
   mutate(Score_rank = 1:94)
 
 Forward_Score <- Forward  %>%
   slice_head(n=5) %>%
-  select(Team, Name, score, Score_rank) %>%
+  select(Team, Name, success_score, Score_rank) %>%
   kable(caption = "Top 5 forward position players for Success Score") %>%
   kable_styling(position = "center")
 
 Forward_Score
 ```
 As seen from the table \@ref(tab:Success-Scores), Calleri from team D. Alavés tops the table  with a total success score of 10.02 followed by Enric Gallego and Carrillo The Success score in this table is calculated by adding the successful duels, tackles and aerial challenges by each player divided by the number of games they have played.
+
+```{r goals-v-success, fig.cap = "Goals vs Success score", fig.align='center'}
+
+library(plotly)
+p <- ggplot(Forward) + geom_point(aes(x=success_score, y = goals_per_game, hoverinfo = Name)) + labs(x = "Success Score", y = "Goals", title = "Goals vs Success Score")
+ggplotly(p)
+```
+The figure \@ref(fig:goals-v-success)) is a scatter plot of all the players' goals and success score per game. The players that occur on the top right corner are so far the top players in our analysis. By hovering the cursor over points we can see that Messi appears to be one of the top players.
 
 
 
