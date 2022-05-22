@@ -37,11 +37,37 @@ The motive of this section is to find out the **best defender** in Laliga (Spani
 ```{r}
 defender <- La_liga_data %>%
   filter(Position == "Defender") %>%
-  select(Team, Name, Percentage.of.games.played, Yellow.Cards, Goals.conceded.while.player.on.pitch,
+  select(Team, Name, Games.played, Yellow.Cards, Goals.conceded.while.player.on.pitch,
          Interceptions, Recoveries, Clearances, Successful.tackles, Unssuccessful.tackles,
          Fouls.committed, Successful.duels, Duels.lost, Successful.aerial.challenges,
          Unsuccessful.aerial.challenges, Fouls.committed.per.card )
 ```
+
+We will try to find the best defender by going through different levels, the major one being, trying to find the player who has the most recoveries and clearances. 
+
+* Recovery  - A recovery is recorded at the point where the player of the team beginning the possession touches the ball. 
+
+* Clearance - When a player kicks the ball away from the goal they are defending. 
+
+```{r}
+defender1 <- defender %>%
+  filter(Games.played >= 19)
+ggplot(defender1,
+       aes(x = Clearances,
+           y = Recoveries,
+           colour = Team, 
+           label = Name)) +
+  theme_minimal() +
+  geom_text(size = 5) +
+  theme_gray(base_size = 15) +
+  geom_point() +
+  labs(y = "Number of clearances",
+       x = "Number of Recoveries",
+       title = "Clearances Vs.Recoveries")
+  
+  
+```
+
 
 
 # Section-2
