@@ -42,11 +42,13 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 ### Question:
 
-- Do the goalkeepers play a dominant role in a football team winning rate? 
+- Which football team's goalkeeper has the best performance in Laliga in the season 2019 - 2020 ?
 
 ```{r}
 goal_data <- La_liga_data %>%
-  filter(Position == "Goalkeeper")
+  filter(Position == "Goalkeeper") 
+
+goal_data
 ```
 
 
