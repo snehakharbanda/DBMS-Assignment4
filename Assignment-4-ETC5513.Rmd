@@ -2,16 +2,16 @@
 title: "Collab-assignment-4"
 author: "Rohan Baghel"
 date: '2022-05-20'
-output: html_document
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   eval = TRUE,
-  message = FALSE,  # Change this to FALSE before you submit your assignment
-  warning = FALSE,  # Change this to FALSE before you submit your assignment
-  error = FALSE,    # Change this to FALSE before you submit your assignment
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
   out.width = "80%",
   fig.width = 8, 
   fig.height = 6,
@@ -133,7 +133,96 @@ scored
 
 
 
-# Section-2
+# Position: Forward
+
+The aim of this section is to analyse which player is the best in the *Forward position* in the LaLiga Tournament based on data from 2019-2020.  
+
+```{r Filter-Data}
+Forward <- La_liga_data %>%
+  filter (Position == "Forward")
+
+Forward <- Forward %>%
+  select(Team, Name, Games.played, Yellow.Cards, Goals.scored, Penalties.scored, Successful.tackles, Recoveries, Successful.duels, Assists, Interceptions, Recoveries, Successful.aerial.challenges) %>%
+  rename("Games_played" = Games.played,
+         "Yellow_cards" = Yellow.Cards,
+         "Goals_scored" = Goals.scored,
+         "Penalties_scored" = Penalties.scored,
+         "Successful_tackles" = Successful.tackles,
+         "Successful_duels" = Successful.duels,
+         "Successful_aerial_challenges" = Successful.aerial.challenges)
+```
+
+Goals Scored, Penalties Scored and Assists account for the most successful outcome given by a player in the Forward position.
+
+```{r Goals-Analysis}
+Forward <- Forward %>%
+  mutate(goals_per_game = ((Goals_scored + Penalties_scored + Assists)/Games_played)) %>%
+  arrange(desc(goals_per_game)) %>%
+  mutate(Goal_rank = 1:94)
+
+Forward_Goal <- Forward %>%
+  slice_head(n=5) %>%
+  select(Team, Name, goals_per_game, Goal_rank) %>%
+  kable(caption = "Top 5 forward position players for goals per game") %>%
+  kable_styling(position = "center")
+
+Forward_Goal
+```
+
+The table \@ref(tab:Goals-Analysis) displays the Name and Team of the top 5 players in the forward position with the highest goals, penalties and assists per game. Messi from Team FC Barcelona holds the first rank in this analysis with an average of 1.55 goals per match, followed by lago Aspas and Suárez.
+
+```{r Success-Scores}
+Forward <- Forward %>%
+  mutate(success_score = (Successful_tackles + Successful_duels + Successful_aerial_challenges)/Games_played) %>%
+  arrange(desc(success_score))  %>%
+  mutate(Score_rank = 1:94)
+
+Forward_Score <- Forward  %>%
+  slice_head(n=5) %>%
+  select(Team, Name, success_score, Score_rank) %>%
+  kable(caption = "Top 5 forward position players for Success Score") %>%
+  kable_styling(position = "center")
+
+Forward_Score
+```
+As seen from the table \@ref(tab:Success-Scores), Calleri from team D. Alavés tops the table  with a total success score of 10.02 followed by Enric Gallego and Carrillo The Success score in this table is calculated by adding the successful duels, tackles and aerial challenges by each player divided by the number of games they have played.
+
+```{r goals-v-success, fig.cap = "Goals vs Success score", fig.align='center'}
+
+library(plotly)
+p <- ggplot(Forward) + geom_point(aes(x=success_score, y = goals_per_game, hoverinfo = Name)) + labs(x = "Success Score", y = "Goals", title = "Goals vs Success Score")
+ggplotly(p)
+```
+The figure \@ref(fig:goals-v-success) is a scatter plot of all the players' goals and success score per game. The players that occur on the top right corner are so far the top players in our analysis. By hovering the cursor over points we can see that Messi appears to be one of the top players.
+
+
+```{r Yellow-cards, fig.cap = "Top 20 yellow card players", fig.align='center'}
+Forward_yellow <- Forward %>% select(Team, Name, Yellow_cards) %>%
+  arrange(desc(Yellow_cards)) %>% slice_head(n=20)
+
+ggplot(Forward_yellow) + geom_col(aes(y=Yellow_cards, x=fct_reorder(Name, Yellow_cards)), fill = "#F6BE00") + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Highest yellow card players")
+```
+
+The figure \@ref(fig:Yellow-cards) displays the players with the highest number of yellow cards. 
+
+```{r Top}
+Forward_top <- Forward %>% anti_join(Forward_yellow) %>%
+  mutate(rank = (Goal_rank + Score_rank)/2) %>%
+  arrange(rank) %>%
+  select(Team, Name) %>% 
+  slice_head(n=5)
+
+Forward_top <- Forward_top %>% slice_head(n=5) %>%
+  kable(caption = "Top 5 forward position players") %>%
+  kable_styling(position = "center")
+
+Forward_top
+```
+
+The table \@ref(tab:Top) displays the top 5 forward position players in the LaLiga Tournament according to the 2019-2022 data on the basis of their goals, assists, successful duels and tackles per game and after removing the players with high number of yellow cards. **[Messi from FC Barcelona](images/messi.jpeg)** is at the top of the list followed by M. Gómez, Jorge Molina, Williams and Enric Gallego.\
+
 
 # Section-3
 
