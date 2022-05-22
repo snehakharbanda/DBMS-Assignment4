@@ -99,7 +99,7 @@ The figure \@ref(fig:goals-v-success) is a scatter plot of all the players' goal
 Forward_yellow <- Forward %>% select(Team, Name, Yellow_cards) %>%
   arrange(desc(Yellow_cards)) %>% slice_head(n=20)
 
-ggplot(Forward_yellow) + geom_col(aes(y=Yellow_cards, x=Name), fill = "#F6BE00") + 
+ggplot(Forward_yellow) + geom_col(aes(y=Yellow_cards, x=fct_reorder(Name, Yellow_cards)), fill = "#F6BE00") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Highest yellow card players")
 ```
@@ -120,7 +120,8 @@ Forward_top <- Forward_top %>% slice_head(n=5) %>%
 Forward_top
 ```
 
-The table \@ref(tab:Top) displays the top 5 forward position players in the LaLiga Tournament according to the 2019-2022 data on the basis of their goals, assists, successful duels and tackles per game and after removing the players with high number of yellow cards. **Messi from Barcelona** is at the top of the list followed by M. Gómez, Jorge Molina, Williams and Enric Gallego.\
+The table \@ref(tab:Top) displays the top 5 forward position players in the LaLiga Tournament according to the 2019-2022 data on the basis of their goals, assists, successful duels and tackles per game and after removing the players with high number of yellow cards. **[Messi from FC Barcelona](images/messi.jpeg)** is at the top of the list followed by M. Gómez, Jorge Molina, Williams and Enric Gallego.\
+
 
 # Section-3
 
