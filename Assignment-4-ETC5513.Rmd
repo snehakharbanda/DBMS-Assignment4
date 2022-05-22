@@ -41,13 +41,14 @@ Forward <- La_liga_data %>%
   filter (Position == "Forward")
 
 Forward <- Forward %>%
-  select(Team, Name, Games.played, Yellow.Cards, Goals.scored, Penalties.scored, Successful.tackles, Recoveries, Successful.duels, Assists, Interceptions, Recoveries) %>%
+  select(Team, Name, Games.played, Yellow.Cards, Goals.scored, Penalties.scored, Successful.tackles, Recoveries, Successful.duels, Assists, Interceptions, Recoveries, Successful.aerial.challenges) %>%
   rename("Games_played" = Games.played,
          "Yellow_cards" = Yellow.Cards,
          "Goals_scored" = Goals.scored,
          "Penalties_scored" = Penalties.scored,
          "Successful_tackles" = Successful.tackles,
-         "Successful_duels" = Successful.duels)
+         "Successful_duels" = Successful.duels,
+         "Successful_aerial_challenges" = Successful.aerial.challenges)
 ```
 
 Goals Scored, Penalties Scored and Assists account for the most successful outcome given by a player in the Forward position.
@@ -55,19 +56,36 @@ Goals Scored, Penalties Scored and Assists account for the most successful outco
 ```{r Goals-Analysis}
 Forward <- Forward %>%
   mutate(goals_per_game = ((Goals_scored + Penalties_scored + Assists)/Games_played)) %>%
-  arrange(desc(goals_per_game))
+  arrange(desc(goals_per_game)) %>%
+  mutate(Goal_rank = 1:94)
 
 Forward_Goal <- Forward %>%
-  slice_head(n=10) %>%
-  mutate(rank = 1:10)
-  select(Team, Name, goals_per_game) %>%
-  kable(caption = "Top 10 forward position players for goals per game") %>%
+  slice_head(n=5) %>%
+  select(Team, Name, goals_per_game, Goal_rank) %>%
+  kable(caption = "Top 5 forward position players for goals per game") %>%
   kable_styling(position = "center")
 
 Forward_Goal
 ```
 
-The table \@ref(tab:Goals-Analysis) displays the top 10 players in the forward position along with the team they play for with the highest goals, penalties and assists per game.
+The table \@ref(tab:Goals-Analysis) displays the Name and Team of the top 5 players in the forward position with the highest goals, penalties and assists per game. Messi from Team FC Barcelona holds the first rank in this analysis with an average of 1.55 goals per match, followed by lago Aspas and Suárez.
+
+```{r Success-Scores}
+Forward <- Forward %>%
+  mutate(score = (Successful_tackles + Successful_duels + Successful_aerial_challenges)/Games_played) %>%
+  arrange(desc(score))  %>%
+  mutate(Score_rank = 1:94)
+
+Forward_Score <- Forward  %>%
+  slice_head(n=5) %>%
+  select(Team, Name, score, Score_rank) %>%
+  kable(caption = "Top 5 forward position players for Success Score") %>%
+  kable_styling(position = "center")
+
+Forward_Score
+```
+As seen from the table \@ref(tab:Success-Scores), Calleri from team D. Alavés tops the table  with a total success score of 10.02 followed by Enric Gallego and Carrillo The Success score in this table is calculated by adding the successful duels, tackles and aerial challenges by each player divided by the number of games they have played.
+
 
 
 # Section-3
