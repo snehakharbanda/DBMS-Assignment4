@@ -32,7 +32,7 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 \section*{Defender}
 
-The motive of this section is to find out the **best defender** in Laliga (Spanish football league), season 2019-2020 according to player stats. We will be analyzing different variables to get the best defender out of the 20 teams. 
+The motive of this section is to find out the **best defender** and the worst defender in Laliga (Spanish football league), season 2019-2020 according to player stats. We will be analyzing different variables to get the best defender out of the 20 teams. 
 
 ```{r}
 defender <- La_liga_data %>%
@@ -40,7 +40,7 @@ defender <- La_liga_data %>%
   select(Team, Name, Games.played, Yellow.Cards, Goals.conceded.while.player.on.pitch,
          Interceptions, Recoveries, Clearances, Successful.tackles, Unssuccessful.tackles,
          Fouls.committed, Successful.duels, Duels.lost, Successful.aerial.challenges,
-         Unsuccessful.aerial.challenges, Fouls.committed.per.card )
+         Unsuccessful.aerial.challenges)
 ```
 
 We will try to find the best defender by going through different levels, the major one being, trying to find the player who has the most recoveries and clearances. 
@@ -49,7 +49,9 @@ We will try to find the best defender by going through different levels, the maj
 
 * Clearance - When a player kicks the ball away from the goal they are defending. 
 
-```{r}
+We will only analyze players who have played more than 50% of the games, considering consistency is key factor for a 38 matches long league.
+
+```{r CvsR, fig.align = 'center', fig.cap = "Clearances vs Recoveries"}
 defender1 <- defender %>%
   filter(Games.played >= 19)
 ggplot(defender1,
@@ -67,6 +69,30 @@ ggplot(defender1,
   
   
 ```
+
+From \@ref(fig:CvsR) we can say that **Pique** from **Barcelona** and **Laguardia** from **D. Alaves** have managed to do exceptionally well. Out of the two players, we will try to choose the best defender by bringing in more variables into the picture. 
+
+```{r}
+defender2 <- defender1 %>%
+  filter(Name == "Piqué" | Name == "Laguardia") %>%
+  mutate(tackles = (Successful.tackles/(Successful.tackles + Unssuccessful.tackles)*100)) %>%
+  mutate(duels = (Successful.duels/(Successful.duels + Duels.lost)*100)) %>%
+  mutate(aerials = (Successful.aerial.challenges/(Unsuccessful.aerial.challenges +
+                                                    Successful.aerial.challenges)*100))
+
+name <- defender2$Name
+teams <- defender2$Team
+goals_conceded <- defender2$Goals.conceded.while.player.on.pitch
+Tackles_success <- defender2$tackles
+Duels_success <- defender2$duels
+Aerials_success <- defender2$aerials
+
+better <- data.frame(name, teams, goals_conceded, Tackles_success, Duels_success, Aerials_success)
+
+knitr::kable(better, caption = "Comparison of Pique and Laguardia")
+  
+```
+
 
 
 
