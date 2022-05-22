@@ -36,22 +36,39 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 # Section-3
 
-# Section-4
+# Position : Goalkeeper
 
-## Goalkeeper
+## Question:
 
-### Question:
-
-- Which football team's goalkeeper has the best performance in Laliga in the season 2019 - 2020 ?
+__- Which football team's goalkeeper has the best performance in La-Liga in the season 2019 - 2020 ?__
 
 ```{r}
 goal_data <- La_liga_data %>%
   filter(Position == "Goalkeeper") %>%
-  select(Team, Position, Games.played, Goals.conceded.while.player.on.pitch, Recoveries, Clearances) %>%
+  select(Team, Position, Name, Games.played, Goals.conceded.while.player.on.pitch, Recoveries, Clearances) %>%
   rename("Game_played" = Games.played,
          "Goal_conceded" = Goals.conceded.while.player.on.pitch)
-
-goal_data
 ```
 
+```{r graph, echo = FALSE, message = FALSE, warning = FALSE}
+p2 <- ggplot(mean_goal_data, 
+             aes(x = Name, 
+                 y = Recoveries, label = Name)) +
+  geom_point() +
+  geom_text(hjust = 0.5, vjust = -1) + 
+  theme(axis.text.x=element_blank(),
+        axis.ticks = element_blank())
+
+p3 <- ggplot(mean_goal_data, 
+             aes(x = Name, 
+                 y = Clearances, label = Name)) +
+  geom_point() +
+  geom_text(hjust = 0.5, vjust = -1) + 
+  theme(axis.text.x=element_blank(),
+        axis.ticks = element_blank())
+
+gridExtra::grid.arrange(p2, p3, ncol = 2)
+```
+
+In Figure \@ref(fig:graph), it shows the data of Recoveries and Clearances for each goalkeeper in La-Liga during the season 2019 to 2020.
 
