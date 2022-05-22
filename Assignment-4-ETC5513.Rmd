@@ -32,14 +32,25 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 \section*{Defender}
 
-The motive of this section is to find out the **best defender** and the worst defender in Laliga (Spanish football league), season 2019-2020 according to player stats. We will be analyzing different variables to get the best defender out of the 20 teams. 
+The motive of this section is to find out the **best defender** in Laliga (Spanish football league), season 2019-2020 according to player stats. We will be analyzing different variables to get the best defender out of the 20 teams. 
 
 ```{r}
 defender <- La_liga_data %>%
   filter(Position == "Defender") %>%
-  select(Team, Name, Games.played, Yellow.Cards, Goals.conceded.while.player.on.pitch,
-         Interceptions, Recoveries, Clearances, Successful.tackles, Unssuccessful.tackles,
-         Fouls.committed, Successful.duels, Duels.lost, Successful.aerial.challenges,
+  select(Team,
+         Name,
+         Games.played,
+         Yellow.Cards,
+         Goals.conceded.while.player.on.pitch,
+         Interceptions,
+         Recoveries,
+         Clearances,
+         Successful.tackles,
+         Unssuccessful.tackles,
+         Fouls.committed,
+         Successful.duels,
+         Duels.lost,
+         Successful.aerial.challenges,
          Unsuccessful.aerial.challenges)
 ```
 
@@ -72,7 +83,7 @@ ggplot(defender1,
 
 From \@ref(fig:CvsR) we can say that **Pique** from **Barcelona** and **Laguardia** from **D. Alaves** have managed to do exceptionally well. Out of the two players, we will try to choose the best defender by bringing in more variables into the picture. 
 
-```{r}
+```{r better}
 defender2 <- defender1 %>%
   filter(Name == "Piqué" | Name == "Laguardia") %>%
   mutate(tackles = (Successful.tackles/(Successful.tackles + Unssuccessful.tackles)*100)) %>%
@@ -82,17 +93,43 @@ defender2 <- defender1 %>%
 
 name <- defender2$Name
 teams <- defender2$Team
-goals_conceded <- defender2$Goals.conceded.while.player.on.pitch
 Tackles_success <- defender2$tackles
 Duels_success <- defender2$duels
 Aerials_success <- defender2$aerials
 
 better <- data.frame(name, teams, goals_conceded, Tackles_success, Duels_success, Aerials_success)
 
-knitr::kable(better, caption = "Comparison of Pique and Laguardia")
+knitr::kable(better, caption = "Comparison of Pique and Laguardia (better)")
   
 ```
+In the table above \@ref(tab:better) we have calculated the percentage of succeessful tackles, duels and Aerial duels won by the each of the defender who came on top in \@ref(fig:CvsR) i.e Pique and Laguardia. Laguardia top the charts between him and Pique in Successful tackles made and Duels won but the difference is bleak. Pique had 20% more Aerial duel success than Laguardia. 
 
+Seems like both of them are are still going to head to head. Now we have to judge them by number of mistakes made by them during the season.
+
+```{r worse}
+defender3 <- defender1 %>%
+  filter(Name == "Piqué" | Name == "Laguardia")
+
+name <- defender2$Name
+teams <- defender2$Team
+goals_conceded <- defender2$Goals.conceded.while.player.on.pitch
+yellow <- defender3$Yellow.Cards
+fouls <- defender3$Fouls.committed
+
+worse <- data.frame(name, goals_conceded, teams, yellow, fouls)
+
+knitr::kable(worse, caption = "Comparison of Pique and Laguardia (worse)")
+```
+
+From the table \@ref(tab:worse) we can see Pique has made lesser mistakes in a match the while being on the field as compared to Laguardia. His team conceded lesser goals, he made lesser fouls which resulted him getting penalized less often. We can conclude from our analysis that Pique from Barcelona had the most impact as a defender. On top of that he was also able to contribute in the attack as he scored 4 goals for FC Barcelona.
+
+```{r}
+scored <- La_liga_data %>%
+  filter(Name == "Piqué") %>%
+  select(Name, Team,  Goals.scored)
+
+scored
+```
 
 
 
