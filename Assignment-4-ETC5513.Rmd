@@ -30,7 +30,19 @@ library(bookdown)
 La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 ```
 
-# Section-1 
+\section*{Defender}
+
+The motive of this section is to find out the **best defender** in Laliga (Spanish football league), season 2019-2020 according to player stats. We will be analyzing different variables to get the best defender out of the 20 teams. 
+
+```{r}
+defender <- La_liga_data %>%
+  filter(Position == "Defender") %>%
+  select(Team, Name, Percentage.of.games.played, Yellow.Cards, Goals.conceded.while.player.on.pitch,
+         Interceptions, Recoveries, Clearances, Successful.tackles, Unssuccessful.tackles,
+         Fouls.committed, Successful.duels, Duels.lost, Successful.aerial.challenges,
+         Unsuccessful.aerial.challenges, Fouls.committed.per.card )
+```
+
 
 # Section-2
 
