@@ -46,7 +46,10 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 ```{r}
 goal_data <- La_liga_data %>%
-  filter(Position == "Goalkeeper") 
+  filter(Position == "Goalkeeper") %>%
+  select(Team, Position, Games.played, Goals.conceded.while.player.on.pitch, Recoveries, Clearances) %>%
+  rename("Game_played" = Games.played,
+         "Goal_conceded" = Goals.conceded.while.player.on.pitch)
 
 goal_data
 ```
