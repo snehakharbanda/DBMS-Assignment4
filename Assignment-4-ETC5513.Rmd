@@ -104,3 +104,7 @@ goal_data4 <- goal_data2 %>%
 knitr::kable(goal_data4, caption = "Top 10 Goalkeepers" , "pipe", align = "cc")
 ```
 
+In Table \@ref(tab:goal-data1), it shows the football recoveries and clearances of top 10 goalkeepers in in La-Liga during the season 2019 to 2020.. 
+
+In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \@ref(fig:graph) shows the performance of each single goalkeeper in term of  Recoveries and Clearances during the season. In The Figure \@ref(fig: scatterplot), it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, goalkeeper has a good performance in term of Recoveries tends also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \@ref(tab:goal-data1), the goalkeeper David Soria, from football team Getafe CF, has the best performance in La-Liga during season 2019 - 2020. 
+
