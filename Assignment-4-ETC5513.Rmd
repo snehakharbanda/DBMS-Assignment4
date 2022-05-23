@@ -236,17 +236,15 @@ Forward_top
 
 The table \@ref(tab:Top) displays the top 5 forward position players in the LaLiga Tournament according to the 2019-2022 data on the basis of their goals, assists, successful duels and tackles per game and after removing the players with high number of yellow cards. **[Messi from FC Barcelona](images/messi.jpeg)** is at the top of the list followed by M. Gómez, Jorge Molina, Williams and Enric Gallego.\
 
-
-
 # Position: Midfielder
 
 ### Aim :
 
-* Find out the best attacking midfielders in La Liga and analyze their performance.
+* Find out the best offensive midfielders in La Liga (2019-2020) and analyze their performance.
 
-* Find out the best defensive midfielders in La Liga and analyze their performance.
+* Find out the best defensive midfielders in La Liga (2019-2020) and analyze their performance.
 
-Midfielders are the players that are present between the forwards and the defenders. The role of a midfielder is to support both the strikers and the defenders. They act is a link between the attack and defense of a team. The flow of a game is dictated by the midfielders as they are the ones responsible for keeping the ball in possession.
+Midfielders are the players that are present between the forwards and the defenders. The role of a midfielder is to support both the strikers and the defenders. They act as a link between the offense and defense of a team. The flow of a game is dictated by the midfielders as they are the ones responsible for keeping the ball in possession.
 
 ```{r}
 Midfielder_data <- La_liga_data %>%
@@ -311,15 +309,16 @@ From the table \@ref(tab:Attack) we can see the attacking performance of midfiel
 ```{r Attack }
 Attack_performance <- inner_join(Top_10_Midfielder_Goals,Top_10_Midfielder_Assists)[1:10,1:6]
 
-kable(Attack_performance, caption = "Best Attacking Midfielders in La Liga (Statistics)") %>%
-  kable_material_dark()
+kable(Attack_performance, caption = "Best Offensive Midfielders in La Liga (Statistics)") %>%
+  kable_material() %>%
+  kable_styling(position = "center")
 ```
 
 
 The figure \@ref(fig:ggAttack) gives a better outlook at the performance of the top midfielders in La Liga. Sarabia and J. Morales standout among their peers as they clearly the leaders in attacking style play, they have scored goals and provided assistance for the benefit of their team. Joaquin from Real Betis is a special case as he is the only midfielder that has provided zero assists but scored 6 goals for his team, earning him a place among the top ten midfielders of La Liga. 
 
 
-```{r ggAttack,fig.cap = "Best Attacking Midfielders in La Liga" }
+```{r ggAttack,fig.cap = "Best Offensive Midfielders in La Liga" }
 ggplot(Attack_performance,
        aes(x = Games.played)) +
   geom_col(aes( y = Goals.scored, color = "Goals scored")) +
@@ -328,7 +327,7 @@ ggplot(Attack_performance,
   theme_classic() +
   xlab("Games Played") +
   ylab("Attack Performance") +
-  labs(title = "Best Attacking Midfielders in La Liga")
+  labs(title = "Best Offensive Midfielders in La Liga")
   
 ```
 
@@ -360,7 +359,8 @@ From the table \@ref(tab:Defense), we see the top defensive midfielders in La Li
 Defence_Performance <- inner_join(Top_10_Midfielder_Recoveries,Top_10_Midfielder_Successful_tackles)[1:10,1:6]
 
 kable(Defence_Performance, caption = "Best Defensive Midfielders in La Liga (Statistics)") %>%
-  kable_material_dark()
+  kable_material() %>%
+  kable_styling(position = "center")
 
 ```
 
@@ -380,14 +380,15 @@ ggplot(Defence_Performance,
   labs(title = "Best Defensive Midfielders in La Liga ") 
 ```
 
-The best overall performance is given by Parejo of Valencia CF as we can from the table \@ref(tab:best). He has made 270 recoveries, 42 successful tackles, scored 9 goals and made 7 assists. He has been at the third position in both attacking midfielders and defensive midfielders. His performance has been exceptional as midfielder and is quite an ideal candidate for any team.
+The best overall performance is given by Parejo of Valencia CF as we can from the table \@ref(tab:best). He has made 270 recoveries, 42 successful tackles, scored 9 goals and made 7 assists. He has been at the third position in both offensive midfielders and defensive midfielders. His performance has been exceptional as midfielder and is quite an ideal candidate for any team.
 
 
 ```{r best}
 Best_Midfielder <- inner_join(Defence_Performance,Attack_performance)
 
 kable(Best_Midfielder, caption = "Best Overall Performace") %>%
-  kable_material_dark()
+  kable_material() %>%
+  kable_styling(position = "center")
 
 ```
 
