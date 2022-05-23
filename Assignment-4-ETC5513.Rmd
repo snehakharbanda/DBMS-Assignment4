@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
   out.width = "80%",
   fig.width = 8, 
   fig.height = 6,
-  fig.retina = 3)
+  fig.retina = 3,
+  fig.align = "center")
 set.seed(6)
 ```
 
