@@ -72,3 +72,35 @@ gridExtra::grid.arrange(p2, p3, ncol = 2)
 
 In Figure \@ref(fig:graph), it shows the data of Recoveries and Clearances for each goalkeeper in La-Liga during the season 2019 to 2020.
 
+```{r scatterplot}
+ggplot(goal_data, 
+       aes(x = Recoveries,
+           y = Clearances)) +
+  geom_point() +
+  theme_bw()
+```
+
+In Figure \@ref(fig: scatterplot), it displays a scatter plot for goalkeepers' Recoveries and Clearances, it demonstrates there is a positive relationship between variable Clearances and Recoveries.
+
+```{r goal-data1, echo = FALSE, message = FALSE, warning = FALSE}
+goal_data2 <- goal_data %>%
+  select(Team, Name, Recoveries) %>%
+  arrange(desc(Recoveries)) %>%
+  mutate("Rank_recoveries" = 1:n())
+
+goal_data3 <- goal_data %>%
+  select(Name, Clearances) %>%
+  arrange(desc(Clearances)) %>%
+  mutate("Rank_clearances" = 1:n())
+
+goal_data4 <- goal_data2 %>%
+  left_join(goal_data3, by = "Name") %>%
+  mutate("Average" = (Rank_recoveries + Rank_clearances)/2) %>%
+  arrange(Average) %>%
+  head(10) %>%
+  select(Team, Name, Recoveries, Clearances) %>%
+  mutate("Rank" = 1:n())
+
+knitr::kable(goal_data4, caption = "Top 10 Goalkeepers" , "pipe", align = "cc")
+```
+
