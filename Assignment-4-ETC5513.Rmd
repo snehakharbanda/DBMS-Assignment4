@@ -387,7 +387,7 @@ The Aim of this section is to find out the __best goalkeeper__ in La-Liga (A Spa
 
 __Question:__
 
-__- Which football team's goalkeeper has the best performance in La-Liga in the season 2019 - 2020 ?__
+__ Which football team's goalkeeper has the best performance in La-Liga in the season 2019 - 2020 ?__
 
 ```{r}
 goal_data <- La_liga_data %>%
@@ -395,15 +395,17 @@ goal_data <- La_liga_data %>%
   select(Team, Position, Name, Games.played, Goals.conceded.while.player.on.pitch, Recoveries, Clearances) %>%
   rename("Game_played" = Games.played,
          "Goal_conceded" = Goals.conceded.while.player.on.pitch)
+mean_goal_data <- goal_data %>%
+  filter(Game_played > 0)
 ```
 
-The football term __"Recoveries"__ can be defined as "Ball recoveries" stands for recovering the ball in a situation where neither team has possession or where the ball has been played directly to a player by an opponent.
+- The football term __"Recoveries"__ can be defined as "Ball recoveries" stands for recovering the ball in a situation where neither team has possession or where the ball has been played directly to a player by an opponent.
 
-The football term __"Clearances"__ can be defined as when a goalkeeper kicks the ball away from the goal they are defending
+- The football term __"Clearances"__ can be defined as when a goalkeeper kicks the ball away from the goal they are defending
 
 Those two terms __"Recoveries" and "Clearances"__ are the two main variables we will be focused on for analysis goalkeeper's performance. 
 
-```{r graph, echo = FALSE, message = FALSE, warning = FALSE}
+```{r graph-data, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Recoveries and Clearances"}
 p2 <- ggplot(mean_goal_data, 
              aes(x = Name, 
                  y = Recoveries, label = Name)) +
@@ -423,9 +425,9 @@ p3 <- ggplot(mean_goal_data,
 gridExtra::grid.arrange(p2, p3, ncol = 2)
 ```
 
-In Figure \@ref(fig:graph), it shows the data of Recoveries and Clearances for each goalkeeper in La-Liga during the season 2019 to 2020.
+In Figure \@ref(fig:graph-data), it shows the data of Recoveries and Clearances for each goalkeeper in La-Liga during the season 2019 to 2020.
 
-```{r scatterplot}
+```{r scatter-plot, fig.cap = "Scatter plot for Recoveries and Clearances"}
 ggplot(goal_data, 
        aes(x = Recoveries,
            y = Clearances)) +
@@ -433,7 +435,7 @@ ggplot(goal_data,
   theme_bw()
 ```
 
-In Figure \@ref(fig: scatterplot), it displays a scatter plot for goalkeepers' Recoveries and Clearances, it demonstrates there is a positive relationship between variable Clearances and Recoveries.
+In Figure \@ref(fig:scatter-plot), it displays a scatter plot for goalkeepers' Recoveries and Clearances, it demonstrates there is a positive relationship between variable Clearances and Recoveries.
 
 ```{r goal-data1, echo = FALSE, message = FALSE, warning = FALSE}
 goal_data2 <- goal_data %>%
@@ -459,4 +461,4 @@ knitr::kable(goal_data4, caption = "Top 10 Goalkeepers" , "pipe", align = "llccr
 
 In Table \@ref(tab:goal-data1), it shows the football recoveries and clearances of top 10 goalkeepers in in La-Liga during the season 2019 to 2020.
 
-In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \@ref(fig:graph) shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \@ref(fig: scatterplot), it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \@ref(tab:goal-data1), the goalkeeper David Soria, from football team Getafe CF, is performing best among all goalkeepers in La-Liga during season 2019 - 2020. 
+In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \@ref(fig:graph) shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \@ref(fig:scatterplot), it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \@ref(tab:goal-data1), the goalkeeper David Soria, from football team Getafe CF, is performing best among all goalkeepers in La-Liga during season 2019 - 2020. 
