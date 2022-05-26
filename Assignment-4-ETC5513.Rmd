@@ -331,10 +331,10 @@ ggplot(Attack_performance,
   geom_col(aes( y = Goals.scored, color = "Goals scored")) +
   geom_col(aes( y = Assists, color = "Assists")) +
   facet_wrap(~Name, ncol = 5) +
-  theme_classic() +
+  theme_minimal() +
   xlab("Games Played") +
   ylab("Attack Performance") +
-  labs(title = "Best Offensive Midfielders in La Liga")
+  labs(title = "Best Offensive Midfielders in La Liga") 
   
 ```
 
@@ -381,7 +381,7 @@ ggplot(Defence_Performance,
   geom_col(aes(y = Recoveries, color = "Recoveries")) +
   geom_col( aes(y = Successful.tackles, color = "Successful tackles")) +
   facet_wrap(~Name, ncol = 5) +
-  theme_classic() +
+  theme_minimal() +
   xlab("Games Played") +
   ylab("Defence Performance") +
   labs(title = "Best Defensive Midfielders in La Liga ") 
@@ -480,14 +480,14 @@ knitr::kable(goal_data4, caption = "Top 10 Goalkeepers" , "pipe", align = "llccr
 
 In Table \@ref(tab:goal-data1), it shows the football recoveries and clearances of top 10 goalkeepers in in La-Liga during the season 2019 to 2020.
 
-In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \@ref(fig:graph) shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \@ref(fig:scatterplot), it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \@ref(tab:goal-data1), the goalkeeper David Soria, from football team Getafe CF, is performing best among all goalkeepers in La-Liga during season 2019 - 2020. 
+In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \@ref(fig:graph-dat) shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \@ref(fig:scatterplot), it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \@ref(tab:goal-data1), the goalkeeper David Soria, from football team Getafe CF, is performing best among all goalkeepers in La-Liga during season 2019 - 2020. 
 
 # Conclusion
 
-* In the first section, there was a tough competition between Gerard Pique and LaGuardia from Barcelona and Alaves respectively \@ref(fig:CvsR) . After comparing each of the defenders from the 20 teams on their defensive capabilities \@ref(fig:better1) **Gerard Pique** from Barcelona came out on top. \
+* In the first section, there was a tough competition between Gerard Pique and LaGuardia from Barcelona and Alaves respectively \@ref(fig:CvsR) . After comparing each of the defenders from the 20 teams on their defensive capabilities \@ref(fig:better1) **Gerard Pique** from Barcelona came out on top. 
 
 * To be the best forward in the league you will have to be a great player offensively and they are the players who get the team the three points in every match. After Comparing all the forwards from the league on their offensive capabilities **Lionel Messi** from Barcelona came out on top as you can also see in \@ref(tab:Top) . 
 
 * Midfielders are usually a mix of both defenders and forwards as they as they are the Important link between forwards and defenders so they have to Master their skills both offensively and defensively. Keeping in mind these criteria’s after our analysis **D. Parejo** from Valencia CF has all the required skills to be the best midfielder in the season 19-20. \@ref(tab:best)
 
-* Lastly, a defender is the backbone of the team as he is our last defender and the first attacker, **David Soria** from Getafe had the most impact as a goalkeeper on the team. \@ref(tab:goal-data1)
+* Lastly, a goalkeeper is the backbone of the team as he is our last defender and the first attacker, **David Soria** from Getafe had the most impact as a goalkeeper on the team. \@ref(tab:goal-data1)
