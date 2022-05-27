@@ -1,8 +1,49 @@
 ---
-title: "Collab-assignment-4"
-author: "Rohan Baghel"
-date: '2022-05-20'
-output: bookdown::html_document2
+title: "Analysing players of LaLiga Football Tournament to find the best player in each Position"
+author:
+- familyname: Kharbanda
+  othernames: Sneha
+  address: Monash Universtiy
+  email: skha0095@student.monash.edu
+  correspondingauthor: true
+  qualifications: Master of Business Analytics
+- familyname: Nirmal
+  othernames: Dhruv
+  address: Monash Universtiy
+  email: dnir0002@student.monash.edu
+  correspondingauthor: true
+  qualifications: Master of Business Analytics
+- familyname: Baghel
+  othernames: Rohan
+  address: Monash Universtiy
+  email: rbag0005@student.monash.edu
+  correspondingauthor: true
+  qualifications: Master of Business Analytics
+- familyname: Xu
+  othernames: Xianghe
+  address: Monash Universtiy
+  email: xxuu0086@student.monash.edu
+  correspondingauthor: true
+  qualifications:  Master of Business Analytics
+department: DBMS consultancy
+organization: Monash University
+bibliography: references.bib
+biblio-style: authoryear-comp
+linestretch: 1.5
+always_allow_html: true
+output:
+  bookdown::pdf_document2:
+    template: monashreport2.tex
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 8
+    includes:
+      in_header: preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: biblatex
+    toc: false
+
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +57,8 @@ knitr::opts_chunk$set(
   fig.width = 8, 
   fig.height = 6,
   fig.retina = 3,
-  fig.align = "center")
+  fig.align = "center",
+  fig.pos="H")
 set.seed(6)
 ```
 
@@ -33,11 +75,11 @@ La_liga_data <- read.csv("data/laliga_player_stats_english.csv")
 
 # Introduction 
 
-LaLiga, is the men's top professional football division of the Spanish football league system. it is contested by 20 teams, with the three lowest-placed teams at the end of each season being relegated to the Segunda División and replaced by the top two teams and a play-off winner in that division. According to UEFA's league coefficient rankings, La Liga has been the top league in Europe in each of the seven years from 2013 to 2019.
+LaLiga, is the men's top professional football division of the Spanish football league system. It is contested by 20 teams, with the three lowest-placed teams at the end of each season being relegated to the Segunda División and replaced by the top two teams and a play-off winner in that division. According to UEFA's league coefficient rankings, La Liga has been the top league in Europe in each of the seven years from 2013 to 2019.
 
 ## Research Question
 
-In this report we are going to analyse the best player in each of the positions. The positions being goalkeeper, forward, defender and midfielder. The data provides information about each and every player in the league like goals scored, assists made, fouls committed etc. In each of the sections we will be Using these variables to the best of our knowledge, to get the best player out of the 20 teams.
+In this report we are going to analyse the best player in each of the positions. The four positions are goalkeeper, forward, defender and midfielder. The data we have used provides information about each and every player in the league like goals scored, assists made, fouls committed etc. In each of the sections we will be using these variables to the best of our knowledge, to get the best player out of the 20 teams. For accurate comparison we have used a base research paper (@dellal2011comparison).
 
 # Position: Defender
 
@@ -119,10 +161,10 @@ ggplot(defender2,
 ```
 
 
-In the figure above \@ref(fig:better1) we have calculated the percentage of succeessful tackles, duels and Aerial duels won by the each of the defender who came on top in \@ref(fig:CvsR) i.e Pique and Laguardia. Laguardia top the charts between him and Pique in Successful tackles made and Duels won but the difference is bleak. Pique had **20%** more Aerial duel success than Laguardia. 
+In the figure above \@ref(fig:better1) we have calculated the percentage of successful tackles, duels and Aerial duels won by the each of the defender who came on top in \@ref(fig:CvsR) i.e Pique and Laguardia. Laguardia top the charts between him and Pique in Successful tackles made and Duels won but the difference is bleak. Pique had **20%** more Aerial duel success than Laguardia. 
 
 Seems like both of them are are still going to head to head. Now we have to judge them by number of mistakes made by them during the season.
-
+\newpage
 ```{r worse}
 defender3 <- defender1 %>%
   filter(Name == "Piqué" | Name == "Laguardia") %>%
@@ -132,30 +174,31 @@ defender3 <- defender1 %>%
          Yellow.Cards,
          Fouls.committed) %>%
   kable(caption = "Comparison of Pique and Laguardia (worse)") %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 defender3
 ```
 
-
-From the table \@ref(tab:worse) we can see Pique has made lesser mistakes in a match the while being on the field as compared to Laguardia. His team conceded lesser goals, he made lesser fouls which resulted him getting penalized less often. We can conclude from our analysis that Pique from Barcelona had the most impact as a defender. On top of that he was also able to contribute in the attack as he scored 4 goals for FC Barcelona.
+From the table \@ref(tab:worse) we can see Pique has made lesser mistakes in a match the while being on the field as compared to Laguardia. His team conceded lesser goals, he made lesser fouls which resulted him getting penalized less often. We can conclude from our analysis that Pique from Barcelona had the most impact as a defender. On top of that he was also able to contribute in the attack as he scored 4 goals for FC Barcelona.\
 
 ```{r}
 scored <- La_liga_data %>%
   filter(Name == "Piqué") %>%
   select(Name, Team,  Goals.scored) %>%
   kable(caption = "Goals scored by Pique") %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 scored
 
 ```
-
+\newpage
 
 
 # Position: Forward
 
-The aim of this section is to analyse which player is the best in the *Forward position* in the LaLiga Tournament based on data from 2019-2020.  
+- The aim of this section is to analyse which player is the best in the *Forward position* (attacking player who is most responsible for scoring goals) in the LaLiga Tournament based on data from 2019-2020. The research paper @majewski2016identification helped in guiding this analysis to the right path.
+
+- The analysis is done using goals scored, penalties scored, assists, success score, and yellow cards received by a player.
 
 ```{r Filter-Data}
 Forward <- La_liga_data %>%
@@ -184,7 +227,7 @@ Forward_Goal <- Forward %>%
   slice_head(n=5) %>%
   select(Team, Name, goals_per_game, Goal_rank) %>%
   kable(caption = "Top 5 forward position players for goals per game") %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 Forward_Goal
 ```
@@ -201,20 +244,23 @@ Forward_Score <- Forward  %>%
   slice_head(n=5) %>%
   select(Team, Name, success_score, Score_rank) %>%
   kable(caption = "Top 5 forward position players for Success Score") %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 Forward_Score
 ```
 As seen from the table \@ref(tab:Success-Scores), Calleri from team D. Alavés tops the table  with a total success score of 10.02 followed by Enric Gallego and Carrillo The Success score in this table is calculated by adding the successful duels, tackles and aerial challenges by each player divided by the number of games they have played.
 
 ```{r goals-v-success, fig.cap = "Goals vs Success score", fig.align='center'}
-
-library(plotly)
-p <- ggplot(Forward) + geom_point(aes(x=success_score, y = goals_per_game, hoverinfo = Name)) + labs(x = "Success Score", y = "Goals", title = "Goals vs Success Score")
-ggplotly(p)
+library(ggrepel)
+ggplot(Forward, aes(x=success_score, y = goals_per_game, label = Name)) +
+  geom_point() +
+  labs(x = "Success Score", y = "Goals") +
+  theme_minimal() +
+  geom_text_repel(size = 3)
 ```
-The figure \@ref(fig:goals-v-success) is a scatter plot of all the players' goals and success score per game. The players that occur on the top right corner are so far the top players in our analysis. By hovering the cursor over points we can see that Messi appears to be one of the top players.
+The figure \@ref(fig:goals-v-success) is a scatter plot of all the players' goals and success score per game. The players that occur on the top right corner are so far the top players in our analysis. We can see that Messi appears to be one of the top players.
 
+Now that we have analysed all the positives, let's dive into the negatives and see how the players perform. A yellow card is given as a caution when a player is reckless, careless, misconduct, or uses excessive force.
 
 ```{r Yellow-cards, fig.cap = "Top 20 yellow card players", fig.align='center'}
 Forward_yellow <- Forward %>% select(Team, Name, Yellow_cards) %>%
@@ -222,7 +268,7 @@ Forward_yellow <- Forward %>% select(Team, Name, Yellow_cards) %>%
 
 ggplot(Forward_yellow) + geom_col(aes(y=Yellow_cards, x=fct_reorder(Name, Yellow_cards)), fill = "#F6BE00") + 
   theme(axis.text.x = element_text(angle = 45)) +
-  labs(title = "Highest yellow card players")
+  labs(title = "Highest yellow card players", y = "Name")
 ```
 
 The figure \@ref(fig:Yellow-cards) displays the players with the highest number of yellow cards. 
@@ -236,13 +282,16 @@ Forward_top <- Forward %>% anti_join(Forward_yellow) %>%
 
 Forward_top <- Forward_top %>% slice_head(n=5) %>%
   kable(caption = "Top 5 forward position players") %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 Forward_top
 ```
 
+We will remove the players from the competition of best forward player that have high number of yellow cards.
+
 The table \@ref(tab:Top) displays the top 5 forward position players in the LaLiga Tournament according to the 2019-2022 data on the basis of their goals, assists, successful duels and tackles per game and after removing the players with high number of yellow cards. **[Messi from FC Barcelona](images/messi.jpeg)** is at the top of the list followed by M. Gómez, Jorge Molina, Williams and Enric Gallego.\
 
+\newpage
 # Position: Midfielder
 
 ### Aim :
@@ -318,7 +367,7 @@ Attack_performance <- inner_join(Top_10_Midfielder_Goals,Top_10_Midfielder_Assis
 
 kable(Attack_performance, caption = "Best Offensive Midfielders in La Liga (Statistics)") %>%
   kable_material() %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 ```
 
 
@@ -367,7 +416,7 @@ Defence_Performance <- inner_join(Top_10_Midfielder_Recoveries,Top_10_Midfielder
 
 kable(Defence_Performance, caption = "Best Defensive Midfielders in La Liga (Statistics)") %>%
   kable_material() %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 ```
 
@@ -395,7 +444,7 @@ Best_Midfielder <- inner_join(Defence_Performance,Attack_performance)
 
 kable(Best_Midfielder, caption = "Best Overall Performace") %>%
   kable_material() %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options = "HOLD_position")
 
 ```
 
@@ -404,9 +453,9 @@ kable(Best_Midfielder, caption = "Best Overall Performace") %>%
 
 The Aim of this section is to find out the __best goalkeeper__ in La-Liga (A Spanish football league) in season 2019-2020 according to player stats. We will be performing an analysis to different variables to find out best goalkeeper. 
 
-__Question:__
+**Question:**
 
-__ Which football team's goalkeeper has the best performance in La-Liga in the season 2019 - 2020 ?__
+**Which football team's goalkeeper has the best performance in La-Liga in the season 2019 - 2020 ?**
 
 ```{r}
 goal_data <- La_liga_data %>%
@@ -475,7 +524,8 @@ goal_data4 <- goal_data2 %>%
   select(Team, Name, Recoveries, Clearances) %>%
   mutate("Rank" = 1:n())
 
-knitr::kable(goal_data4, caption = "Top 10 Goalkeepers" , "pipe", align = "llccr")
+knitr::kable(goal_data4, caption = "Top 10 Goalkeepers" , "pipe", align = "llccr") %>%
+  kable_styling(position = "center", latex_options = "HOLD_position")
 ```
 
 In Table \@ref(tab:goal-data1), it shows the football recoveries and clearances of top 10 goalkeepers in in La-Liga during the season 2019 to 2020.
@@ -483,6 +533,8 @@ In Table \@ref(tab:goal-data1), it shows the football recoveries and clearances 
 In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \@ref(fig:graph-dat) shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \@ref(fig:scatterplot), it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \@ref(tab:goal-data1), the goalkeeper David Soria, from football team Getafe CF, is performing best among all goalkeepers in La-Liga during season 2019 - 2020. 
 
 # Conclusion
+
+The conclusions from each section were validated and compared with existing research like @brito2019new on football players. 
 
 * In the first section, there was a tough competition between Gerard Pique and LaGuardia from Barcelona and Alaves respectively \@ref(fig:CvsR) . After comparing each of the defenders from the 20 teams on their defensive capabilities \@ref(fig:better1) **Gerard Pique** from Barcelona came out on top. 
 

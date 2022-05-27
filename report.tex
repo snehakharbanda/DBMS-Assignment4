@@ -1,0 +1,470 @@
+\documentclass[11pt,a4paper,]{article}
+\usepackage{lmodern}
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdftitle={Comparing CO2 Emissions and Energy Use for different Income Group Countries},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{geometry}
+\geometry{a4paper, centering, text={16cm,24cm}}
+\usepackage[style=authoryear-comp,]{biblatex}
+\addbibresource{references.bib}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Comparing CO2 Emissions and Energy Use for different Income Group Countries}
+
+%% MONASH STUFF
+
+%% CAPTIONS
+\RequirePackage{caption}
+\DeclareCaptionStyle{italic}[justification=centering]
+ {labelfont={bf},textfont={it},labelsep=colon}
+\captionsetup[figure]{style=italic,format=hang,singlelinecheck=true}
+\captionsetup[table]{style=italic,format=hang,singlelinecheck=true}
+
+
+%% FONT
+\RequirePackage{bera}
+\RequirePackage[charter,expert,sfscaled]{mathdesign}
+\RequirePackage{fontawesome}
+
+%% HEADERS AND FOOTERS
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\rfoot{\Large\sffamily\raisebox{-0.1cm}{\textbf{\thepage}}}
+\makeatletter
+\lhead{\textsf{\expandafter{\@title}}}
+\makeatother
+\rhead{}
+\cfoot{}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyfoot[C]{\sffamily\thepage} % except the center
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+%% MATHS
+\RequirePackage{bm,amsmath}
+\allowdisplaybreaks
+
+%% GRAPHICS
+\RequirePackage{graphicx}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.8}
+
+
+%\RequirePackage[section]{placeins}
+
+%% SECTION TITLES
+
+
+%% SECTION TITLES (NEW: Changing sections and subsections color)
+\RequirePackage[compact,sf,bf]{titlesec}
+\titleformat*{\section}{\Large\sf\bfseries\color[rgb]{0.8, 0.7, 0.1 }}
+\titleformat*{\subsection}{\large\sf\bfseries\color[rgb]{0.8, 0.7, 0.1 }}
+\titleformat*{\subsubsection}{\sf\bfseries\color[rgb]{0.8, 0.7, 0.1 }}
+\titlespacing{\section}{0pt}{2ex}{.5ex}
+\titlespacing{\subsection}{0pt}{1.5ex}{0ex}
+\titlespacing{\subsubsection}{0pt}{.5ex}{0ex}
+
+
+%% TITLE PAGE
+\def\Date{\number\day}
+\def\Month{\ifcase\month\or
+ January\or February\or March\or April\or May\or June\or
+ July\or August\or September\or October\or November\or December\fi}
+\def\Year{\number\year}
+
+%% LINE AND PAGE BREAKING
+\sloppy
+\clubpenalty = 10000
+\widowpenalty = 10000
+\brokenpenalty = 10000
+\RequirePackage{microtype}
+
+%% PARAGRAPH BREAKS
+\setlength{\parskip}{1.4ex}
+\setlength{\parindent}{0em}
+
+%% HYPERLINKS
+\RequirePackage{xcolor} % Needed for links
+\definecolor{darkblue}{rgb}{0,0,.6}
+\RequirePackage{url}
+
+\makeatletter
+\@ifpackageloaded{hyperref}{}{\RequirePackage{hyperref}}
+\makeatother
+\hypersetup{
+     citecolor=0 0 0,
+     breaklinks=true,
+     bookmarksopen=true,
+     bookmarksnumbered=true,
+     linkcolor=darkblue,
+     urlcolor=blue,
+     citecolor=darkblue,
+     colorlinks=true}
+
+\usepackage[showonlyrefs]{mathtools}
+\usepackage[no-weekday]{eukdate}
+
+%% BIBLIOGRAPHY
+
+\makeatletter
+\@ifpackageloaded{biblatex}{}{\usepackage[style=authoryear-comp, backend=biber, natbib=true]{biblatex}}
+\makeatother
+\ExecuteBibliographyOptions{bibencoding=utf8,minnames=1,maxnames=3, maxbibnames=99,dashed=false,terseinits=true,giveninits=true,uniquename=false,uniquelist=false,doi=false, isbn=false,url=true,sortcites=false}
+
+\DeclareFieldFormat{url}{\texttt{\url{#1}}}
+\DeclareFieldFormat[article]{pages}{#1}
+\DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
+\DeclareFieldFormat[incollection]{pages}{\lowercase{pp.}#1}
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[article]{title}{\MakeCapital{#1}}
+\DeclareFieldFormat[article]{url}{}
+%\DeclareFieldFormat[book]{url}{}
+%\DeclareFieldFormat[inbook]{url}{}
+%\DeclareFieldFormat[incollection]{url}{}
+%\DeclareFieldFormat[inproceedings]{url}{}
+\DeclareFieldFormat[inproceedings]{title}{#1}
+\DeclareFieldFormat{shorthandwidth}{#1}
+%\DeclareFieldFormat{extrayear}{}
+% No dot before number of articles
+\usepackage{xpatch}
+\xpatchbibmacro{volume+number+eid}{\setunit*{\adddot}}{}{}{}
+% Remove In: for an article.
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{%
+  \printtext{\bibstring{in}\intitlepunct}}}
+
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+
+\makeatletter
+\DeclareDelimFormat[cbx@textcite]{nameyeardelim}{\addspace}
+\makeatother
+
+\author{\sf\Large\textbf{ Sneha Kharbanda}\\ {\sf\large Master of Business Analytics\\[0.5cm]} \sf\Large\textbf{ Dhruv Nirmal}\\ {\sf\large Master of Business Analytics\\[0.5cm]} \sf\Large\textbf{ Rohan Baghel}\\ {\sf\large Master of Business Analytics\\[0.5cm]} \sf\Large\textbf{ Xianghe Xu}\\ {\sf\large Master of Business Analytics\\[0.5cm]}}
+
+\date{\sf\Date~\Month~\Year}
+\makeatletter
+\lfoot{\sf Kharbanda, Nirmal, Baghel, Xu: \@date}
+\makeatother
+
+
+%%%% PAGE STYLE FOR FRONT PAGE OF REPORTS
+
+\makeatletter
+\def\organization#1{\gdef\@organization{#1}}
+\def\telephone#1{\gdef\@telephone{#1}}
+\def\email#1{\gdef\@email{#1}}
+\makeatother
+  \organization{Australian Government COVID19}
+
+  \def\name{Our consultancy \newline add names \&\newline add names}
+
+  \telephone{(03) 9905 2478}
+
+  \email{questions@company.com}                 %NEW: New email addresss
+
+\def\webaddress{\url{http://company.com/stats/consulting/}} %NEW: URl
+\def\abn{12 377 614 630}                                    % NEW: ABN
+\def\logo{\includegraphics[width=6cm]{Figures/logo}}  %NEW: Changing logo
+\def\extraspace{\vspace*{1.6cm}}
+\makeatletter
+\def\contactdetails{\faicon{phone} & \@telephone \\
+                    \faicon{envelope} & \@email}
+\makeatother
+
+%%%% FRONT PAGE OF REPORTS
+
+\def\reporttype{Report for}
+
+\long\def\front#1#2#3{
+\newpage
+\begin{singlespacing}
+\thispagestyle{empty}
+\vspace*{-1.4cm}
+\hspace*{-1.4cm}
+\hbox to 16cm{
+  \hbox to 6.5cm{\vbox to 14cm{\vbox to 25cm{
+    \logo
+    \vfill
+    \parbox{6.3cm}{\raggedright
+      \sf\color[rgb]{0.8, 0.7, 0.1 }    % NEW color 
+      {\large\textbf{\name}}\par
+      \vspace{.7cm}
+      \tabcolsep=0.12cm\sf\small
+      \begin{tabular}{@{}ll@{}}\contactdetails
+      \end{tabular}
+      \vspace*{0.3cm}\par
+      ABN: \abn\par
+    }
+  }\vss}\hss}
+  \hspace*{0.2cm}
+  \hbox to 1cm{\vbox to 14cm{\rule{4pt}{26.8cm}\vss}\hss\hfill}  %NEW: Thicker line
+  \hbox to 10cm{\vbox to 14cm{\vbox to 25cm{   
+      \vspace*{3cm}\sf\raggedright
+      \parbox{11cm}{\sf\raggedright\baselineskip=1.2cm
+         \fontsize{24.88}{30}\color[rgb]{0, 0.29, 0.55}\sf\textbf{#1}}   % NEW: title color blue
+      \par
+      \vfill
+      \large
+      \vbox{\parskip=0.8cm #2}\par
+      \vspace*{2cm}\par
+      \reporttype\\[0.3cm]
+      \hbox{#3}%\\[2cm]\
+      \vspace*{1cm}
+      {\large\sf\textbf{\Date~\Month~\Year}}
+   }\vss}
+  }}
+\end{singlespacing}
+\newpage
+}
+
+\makeatletter
+\def\titlepage{\front{\expandafter{\@title}}{\@author}{\@organization}}
+\makeatother
+
+\usepackage{setspace}
+\setstretch{1.5}
+
+%% Any special functions or other packages can be loaded here.
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+
+\begin{document}
+\titlepage
+
+\section*{Introduction}
+
+With increase in global warming, many countries are trying to take steps towards sustainable use of resources and reduced emissions as inferred from \textcite{g2012w}. The aim of this report is to find out how the income, population, carbon dioxide emissions and energy use are related to each other. The research \textcite{DISLI2016418} and \textcite{o2010global} gave us more insight into this research area. The data used contains information about countries and how the CO2 emissions, energy use and population for them has changed from 1960 to 2018. To accomplish the aim, two countries, with different income groups are selected at one time and the respective data is analysed. As the data contains countries with four different income groups, the report contains four sections comparing countries from different groups.
+
+\section*{Country Nepal and India}
+
+In the section below, CO2 emission, Energy Use and Population of Nepal and India are compared and analysed.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{report_files/figure-latex/plot-1} 
+
+}
+
+\caption{Co2 and Population over years for Nepal and India}\label{fig:plot}
+\end{figure}
+
+In the figure \ref{fig:plot}, Population and Carbon dioxide emissions over the years is plotted for Nepal and India.
+
+\begin{table}[!h]
+
+\caption{\label{tab:mean-CO2-and-Population}Mean CO2 and Energy use for Nepal and India}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+Country\_Name & mean\_CO2 & mean\_Energy & ratio\\
+\midrule
+\cellcolor{gray!6}{India} & \cellcolor{gray!6}{0.8221630} & \cellcolor{gray!6}{384.9569} & \cellcolor{gray!6}{0.0021357}\\
+Nepal & 0.0874632 & 326.2772 & 0.0002681\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In table \ref{tab:mean-CO2-and-Population}, the mean CO2 emission and energy use for Nepal and India are displayed to compare.
+
+Two countries from South Asia were selected(\textcite{A2005rev}): Nepal is a low income country whereas India is a lower middle income group country. Since India has a higher population, as expected, the CO2 emissions have been higher for India and can be seen to be increasing consistently as population increased but Nepal's CO2 emissions seems to be increasing more than the population after 2020. This conclusion can be drawn from the figure \ref{fig:plot}. Due to the huge difference in population, using mean and ratio to compare the countries is more suitable. In table \ref{tab:mean-CO2-and-Population} we can see that although mean energy use for Nepal is high, the CO2 emissions are low but for India there is high energy use and CO2 emission.
+
+\section*{Country Egypt and Algeria}
+
+\begin{itemize}
+\tightlist
+\item
+  Find out if there is a relationship between \textbf{energy use} and \textbf{carbon emission} in Algeria(Upper middle income) and Egypt(Lower middle income).
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{report_files/figure-latex/merge-1} 
+
+}
+
+\caption{CO2 emission and Energy use for Egypt and Algeria}\label{fig:merge}
+\end{figure}
+
+\newpage
+
+\begin{table}
+
+\caption{\label{tab:Mean}Mean CO2 emission and Mean Energy use along the years}
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+Country\_Name & mean\_CO2 & mean\_Energy\_use\\
+\hline
+Algeria & 2.462319 & 805.2922\\
+\hline
+Egypt, Arab Rep. & 1.407389 & 569.0235\\
+\hline
+\end{tabular}
+\end{table}
+
+The Figure \ref{fig:merge} displays Carbon emission and Energy use (Equivalent to Oil in kg) of Egypt and Algeria. Algeria's carbon emission has a lot of ups and downs during the period of 60 years but overall carbon dioxide emission has increased almost linearly, and the same goes for Egypt. There's a significant difference between the carbon emissions of Algeria and Egypt, Algeria's being almost 1.5 times more. Energy use of both the nations has also increased linearly. The table \ref{tab:Mean} tells us the mean Energy use and Carbon emissions of Algeria ad Egypt over the 60 years. Algeria has more overall Carbon footprint. The observations made also agree with research studies \textcite{Algeria} and \textcite{Egypt} .
+
+\section*{Country Cuba and Canada}
+
+\begin{itemize}
+\item
+  Is there a correlation between the urban population of a Canada and Cuba and their carbon emissions ?
+\item
+  Compare the carbon emissions and energy usage of Canada and Cuba after the year 2000.
+\end{itemize}
+
+The Table \ref{tab:CCTable} shows the urban population, carbon emissions and energy consumption for Canada and Cuba for the year 2010. The table shows that the urban population of Canada is almost 3 times to that of Cuba. The carbon emission of Canada is 5 times higher to that of Cuba and energy consumption of Canada is 7 times higher than that of Cuba. This data seems to suggest that there is a positive correlation between urban population and carbon emissions as well energy consumption.
+
+\newpage
+
+\begin{table}
+
+\caption{\label{tab:CCTable}Data for Canada and Cuba (2010)}
+\centering
+\begin{tabular}[t]{l|r|r|r|r}
+\hline
+Country\_Name & Year & CO2\_emission & Urban\_population & Energy\_use\\
+\hline
+Canada & 2010 & 15.723345 & 27522537 & 7788.561\\
+\hline
+Cuba & 2010 & 3.418469 & 8598651 & 1099.503\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{report_files/figure-latex/CCplot1-1} 
+
+}
+
+\caption{The Population growth in Canada and Cuba}\label{fig:CCplot1}
+\end{figure}
+
+The graph for population growth Figure \ref{fig:CCplot1} shows that the urban population of Canada has increased every year from the 1960s till 2020 while population of Cuba has stabilized from the year 2000s onward. Cuba has a stable urban population and has not experienced a decrease in urban population.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{report_files/figure-latex/plots-1} 
+
+}
+
+\caption{Carbon emissions and Energy Consupmtion in Canada and Cuba}\label{fig:plots}
+\end{figure}
+
+\newpage
+
+The graph for Figure \ref{fig:plots} shows carbon emission and energy consumption through oil for Canada and Cuba. The energy consumption of Canada was increasing after the 1960s and the carbon emissions were rising as well. Cuba has relatively stable carbon emissions and energy consumption. Cuba has never seen drastic change in carbon emissions and energy consumption over the years except during the period of 1970s to 1990 when there was high energy consumption and carbon emissions from Cuba. After the 2000s we can see that energy consumption and carbon emission in Cuba has stabilized and shows little change while in Canada the carbon emissions is showing a downward trend and energy consumption is also going down. This shows that there is a positive correlation between energy consumption and carbon emissions.
+
+The studies done by \textcite{o2010global} show that carbon emissions tend to increase with population as they tend to consume more energy resources over a period of time.
+
+\section*{Country Haiti and Uruguay}
+
+\begin{itemize}
+\item
+  How does high income country's CO2 emission per capita and energy use per capita compare with low income country?
+\item
+  Does the change in urban population have impact in CO2 emission per capita?
+\end{itemize}
+
+In Table \ref{tab:mean}, it shows the average of carbon dioxide (CO2) emission metric tons per capita, average urban population and the average energy use per capita for Uruguay and Haiti.
+
+\begin{longtable}[]{@{}lrrr@{}}
+\caption{\label{tab:mean}Mean of CO2 Emission and Urban Population for each country}\tabularnewline
+\toprule
+Country\_Name & Mean\_CO2 & Mean\_pop & Mean\_energy \\
+\midrule
+\endfirsthead
+\toprule
+Country\_Name & Mean\_CO2 & Mean\_pop & Mean\_energy \\
+\midrule
+\endhead
+Haiti & 0.14 & 2426896 & 301.02 \\
+Uruguay & 1.77 & 2722295 & 913.28 \\
+\bottomrule
+\end{longtable}
+
+In Figure \ref{fig:fig-data}, it shows the changes of carbon dioxide (CO2) emissions per capita and Urban population for countries Haiti and Uruguay over the years 1960 to 2020.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{report_files/figure-latex/fig-data-1} 
+
+}
+
+\caption{CO2 emission and Urban Population change for Haiti and Uruguay}\label{fig:fig-data}
+\end{figure}
+
+In this section, there is a positive relationship between carbon dioxide emissions and income. The Table \ref{tab:mean} demonstrates that the high income country Uruguay has higher values of average carbon dioxide (CO2) emission per capita and average energy use per capita than the low income country Haiti. This observation made also agree with research studies \textcite{COGDP}. From the Figure \ref{fig:fig-data}, it shows that level of CO2 emission per capita has not changed much for both countries, although the country Uruguay has higher level of CO2 emissions and greater fluctuations than Haiti. However, the urban populations of the countries are both increasing over the time and Haiti has greater urban population growth rate than Uruguay, the urban population of Haiti exceeds Uruguay in the year 2000. In conclusion, the high income country has higher level of CO2 emissions per capita and energy use per capita than the low income country, and the change in urban population has no impact on level of CO2 emissions per capita.
+
+\section*{Conclusion}
+
+In conclusion, there is a positive correlation between carbon dioxide emissions and income. A higher level income country has a higher level of carbon dioxide emissions per capita and energy use per capita in comparison with a country which has a lower level of income. In contrast, the changes in urban population of a country does not have much impact on changes in level of CO2 emissions per capita and energy use per capita.
+
+\printbibliography
+
+\end{document}
