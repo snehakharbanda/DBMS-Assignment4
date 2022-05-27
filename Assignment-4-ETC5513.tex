@@ -404,15 +404,15 @@ Goals Scored, Penalties Scored and Assists account for the most successful outco
 \hline
 Team & Name & goals\_per\_game & Goal\_rank\\
 \hline
-FC Barcelona & Messi & 1.5588235 & 1\\
+FC Barcelona & Messi & 1.56 & 1\\
 \hline
-RC Celta & Iago Aspas & 1.1481481 & 2\\
+RC Celta & Iago Aspas & 1.15 & 2\\
 \hline
-FC Barcelona & Suárez & 0.9393939 & 3\\
+FC Barcelona & Suárez & 0.94 & 3\\
 \hline
-Real Madrid & Benzema & 0.8333333 & 4\\
+Real Madrid & Benzema & 0.83 & 4\\
 \hline
-Sevilla FC & Ben Yedder & 0.8285714 & 5\\
+Sevilla FC & Ben Yedder & 0.83 & 5\\
 \hline
 \end{tabular}
 \end{table}
@@ -427,15 +427,15 @@ The table \ref{tab:Goals-Analysis} displays the Name and Team of the top 5 playe
 \hline
 Team & Name & success\_score & Score\_rank\\
 \hline
-D. Alavés & Calleri & 10.029412 & 1\\
+D. Alavés & Calleri & 10.03 & 1\\
 \hline
-SD Huesca & Enric Gallego & 9.210526 & 2\\
+SD Huesca & Enric Gallego & 9.21 & 2\\
 \hline
-CD Leganés & Carrillo & 8.937500 & 3\\
+CD Leganés & Carrillo & 8.94 & 3\\
 \hline
-Atlético de Madrid & Morata & 8.666667 & 4\\
+Atlético de Madrid & Morata & 8.67 & 4\\
 \hline
-Rayo Vallecano & M. L. S. Trejo & 7.807692 & 5\\
+Rayo Vallecano & M. L. S. Trejo & 7.81 & 5\\
 \hline
 \end{tabular}
 \end{table}
@@ -614,7 +614,7 @@ Valencia CF & Parejo & 10 & 36 & 270 & 42 & 9 & 7\\
 \hypertarget{position-goalkeeper}{%
 \section{Position : Goalkeeper}\label{position-goalkeeper}}
 
-The Aim of this section is to find out the \textbf{best goalkeeper} in La-Liga (A Spanish football league) in season 2019-2020 according to player stats. We will be performing an analysis to different variables to find out best goalkeeper.
+The Aim of this section is to find out the \textbf{best overall performance goalkeeper} in La-Liga (A Spanish football league) in season 2019-2020 according to player stats. We will be performing an analysis to different variables to find out best goalkeeper.
 
 \textbf{Question:}
 
@@ -627,7 +627,7 @@ The Aim of this section is to find out the \textbf{best goalkeeper} in La-Liga (
   The football term \textbf{``Clearances''} can be defined as when a goalkeeper kicks the ball away from the goal they are defending
 \end{itemize}
 
-Those two terms \textbf{``Recoveries'' and ``Clearances''} are the two main variables we will be focused on for analysis goalkeeper's performance.
+Those two variables \textbf{``Recoveries'' and ``Clearances''} are measures of performance of goalkeepers and we will be focused on for analyzing goalkeeper's performance, and the higher score means better performance.
 
 \begin{figure}[H]
 
@@ -638,7 +638,7 @@ Those two terms \textbf{``Recoveries'' and ``Clearances''} are the two main vari
 \caption{Recoveries and Clearances}\label{fig:graph-data}
 \end{figure}
 
-In Figure \ref{fig:graph-data}, it shows the data of Recoveries and Clearances for each goalkeeper in La-Liga during the season 2019 to 2020.
+In Figure \ref{fig:graph-data}, it shows the recovery scores and clearance scores for each goalkeeper in La-Liga during the season 2019 to 2020.
 
 \begin{figure}[H]
 
@@ -649,7 +649,9 @@ In Figure \ref{fig:graph-data}, it shows the data of Recoveries and Clearances f
 \caption{Scatter plot for Recoveries and Clearances}\label{fig:scatter-plot}
 \end{figure}
 
-In Figure \ref{fig:scatter-plot}, it displays a scatter plot for goalkeepers' Recoveries and Clearances, it demonstrates there is a positive relationship between variable Clearances and Recoveries.
+In Figure \ref{fig:scatter-plot}, it displays a scatter plot for goalkeepers' Recoveries and Clearances.
+
+The scatter plot in Figure \ref{fig:scatter-plot} demonstrates there is a positive relationship between variable Clearances and Recoveries.
 
 \begin{longtable}[]{@{}llccr@{}}
 \caption{\label{tab:goal-data1}Top 10 Goalkeepers}\tabularnewline
@@ -676,7 +678,7 @@ Valencia CF & Neto & 272 & 19 & 10 \\
 
 In Table \ref{tab:goal-data1}, it shows the football recoveries and clearances of top 10 goalkeepers in in La-Liga during the season 2019 to 2020.
 
-In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \ref{fig:graph-dat} shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \ref{fig:scatterplot}, it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to find the average performance on both Recoveries and Clearances, and then the top 10 goalkeepers are listed out based on the average rank of performance. As displayed on Table \ref{tab:goal-data1}, the goalkeeper David Soria, from football team Getafe CF, is performing best among all goalkeepers in La-Liga during season 2019 - 2020.
+In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \ref{fig:graph-data} shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \ref{fig:scatter-plot}, it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to form a new rank for average performance on both Recoveries and Clearances for all goalkeeper, and then the top 10 goalkeepers are listed out based on the rank of overall performance. As displayed on Table \ref{tab:goal-data1}, goalkeeper David Soria, from football team Getafe CF, is overall performing best among all goalkeepers in La-Liga during season 2019 - 2020.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
