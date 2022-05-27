@@ -614,11 +614,15 @@ Valencia CF & Parejo & 10 & 36 & 270 & 42 & 9 & 7\\
 \hypertarget{position-goalkeeper}{%
 \section{Position : Goalkeeper}\label{position-goalkeeper}}
 
-The Aim of this section is to find out the \textbf{best overall performance goalkeeper} in La-Liga (A Spanish football league) in season 2019-2020 according to player stats. We will be performing an analysis to different variables to find out best goalkeeper.
+This section will be focused on goalkeeper position. A goalkeeper, sometimes refers to keeper or goalie, is one of major positions in association football.
+
+The Aim of this section is to find out the \textbf{best overall performance goalkeeper} in La-Liga (A Spanish football league) in season 2019-2020 according to player stats. We will be performing an analysis to different variables to find out a best goalkeeper.
 
 \textbf{Question:}
 
 \textbf{Which football team's goalkeeper has the best performance in La-Liga in the season 2019 - 2020 ?}
+
+The dimensionality of soccer statistics relating to goalkeeper specific data can be difficult to interpret. (\textcite{goalkeeper}) In this case, there are only two variables Recoveries and Clearances measure the performance of goalkeeper.
 
 \begin{itemize}
 \item
@@ -627,7 +631,7 @@ The Aim of this section is to find out the \textbf{best overall performance goal
   The football term \textbf{``Clearances''} can be defined as when a goalkeeper kicks the ball away from the goal they are defending
 \end{itemize}
 
-Those two variables \textbf{``Recoveries'' and ``Clearances''} are measures of performance of goalkeepers and we will be focused on for analyzing goalkeeper's performance, and the higher score means better performance.
+Those two variables \textbf{``Recoveries'' and ``Clearances''} are measures of performance of goalkeepers and we will be focused on for analyzing goalkeeper's performance, and the higher score in the variables means better performance.
 
 \begin{figure}[H]
 
@@ -651,7 +655,7 @@ In Figure \ref{fig:graph-data}, it shows the recovery scores and clearance score
 
 In Figure \ref{fig:scatter-plot}, it displays a scatter plot for goalkeepers' Recoveries and Clearances.
 
-The scatter plot in Figure \ref{fig:scatter-plot} demonstrates there is a positive relationship between variable Clearances and Recoveries.
+The scatter plot in Figure \ref{fig:scatter-plot} demonstrates there is a positive relationship between variable Clearances and Recoveries. This implies that we can combine goalkeepers' performances in recoveries and clearances to figure out the overall performance for goalkeepers.
 
 \begin{longtable}[]{@{}llccr@{}}
 \caption{\label{tab:goal-data1}Top 10 Goalkeepers}\tabularnewline
@@ -676,9 +680,9 @@ Valencia CF & Neto & 272 & 19 & 10 \\
 \bottomrule
 \end{longtable}
 
-In Table \ref{tab:goal-data1}, it shows the football recoveries and clearances of top 10 goalkeepers in in La-Liga during the season 2019 to 2020.
+In Table \ref{tab:goal-data1}, it shows the football recoveries and clearances of top 10 goalkeepers with their overall performance rank in La-Liga during the season 2019 to 2020.
 
-In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \ref{fig:graph-data} shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \ref{fig:scatter-plot}, it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to form a new rank for average performance on both Recoveries and Clearances for all goalkeeper, and then the top 10 goalkeepers are listed out based on the rank of overall performance. As displayed on Table \ref{tab:goal-data1}, goalkeeper David Soria, from football team Getafe CF, is overall performing best among all goalkeepers in La-Liga during season 2019 - 2020.
+In this section, the data of goalkeeper has been using to investigate and in a aim to find which goalkeeper is overall performing best in La-Liga during the season 2019 to 2020. The Figure \ref{fig:graph-data} shows the performance of each single goalkeeper in term of Recoveries and Clearances during the season. In the Figure \ref{fig:scatter-plot}, it demonstrates that there is a linear relationship between Recoveries and Clearances, on other words, a goalkeeper tends to have a good performance in term of Recoveries also performing well in term of Clearances. Based on the observation in the scatter plot, Recoveries and Clearances are two standard variables sharing some similarity. Hence, we can rank each variable Recoveries and Clearance and combine the ranks to form a new rank for overall performance for all goalkeepers in La-liga, and the top 10 goalkeepers are listed out based on the rank of overall performance. As displayed on Table \ref{tab:goal-data1}, goalkeeper David Soria, from football team Getafe CF, has best overall performing among all goalkeepers in La-Liga during season 2019 - 2020.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
@@ -687,13 +691,13 @@ The conclusions from each section were validated and compared with existing rese
 
 \begin{itemize}
 \item
-  In the first section, there was a tough competition between Gerard Pique and LaGuardia from Barcelona and Alaves respectively \ref{fig:CvsR} . After comparing each of the defenders from the 20 teams on their defensive capabilities \ref{fig:better1} \textbf{Gerard Pique} from Barcelona came out on top.
+  In the first section, there was a tough competition between Gerard Pique and LaGuardia from Barcelona and Alaves respectively (Figure \ref{fig:CvsR}). After comparing each of the defenders from the 20 teams on their defensive capabilities (Figure \ref{fig:better1}) \textbf{Gerard Pique} from Barcelona came out on top.
 \item
-  To be the best forward in the league you will have to be a great player offensively and they are the players who get the team the three points in every match. After Comparing all the forwards from the league on their offensive capabilities \textbf{Lionel Messi} from Barcelona came out on top as you can also see in \ref{tab:Top} .
+  To be the best forward in the league you will have to be a great player offensively and they are the players who get the team the three points in every match. After Comparing all the forwards from the league on their offensive capabilities \textbf{Lionel Messi} from Barcelona came out on top as you can also see in (Table \ref{tab:Top}) .
 \item
-  Midfielders are usually a mix of both defenders and forwards as they as they are the Important link between forwards and defenders so they have to Master their skills both offensively and defensively. Keeping in mind these criteria's after our analysis \textbf{D. Parejo} from Valencia CF has all the required skills to be the best midfielder in the season 19-20. \ref{tab:best}
+  Midfielders are usually a mix of both defenders and forwards as they as they are the Important link between forwards and defenders so they have to Master their skills both offensively and defensively. Keeping in mind these criteria's after our analysis \textbf{D. Parejo} from Valencia CF has all the required skills to be the best midfielder in the season 19-20. (Table \ref{tab:best})
 \item
-  Lastly, a goalkeeper is the backbone of the team as he is our last defender and the first attacker, \textbf{David Soria} from Getafe had the most impact as a goalkeeper on the team. \ref{tab:goal-data1}
+  Lastly, a goalkeeper is the backbone of the team as he is our last defender and the first attacker, \textbf{David Soria} from Getafe had the most impact as a goalkeeper on the team. (As shown in Table \ref{tab:goal-data1})
 \end{itemize}
 
 \printbibliography
